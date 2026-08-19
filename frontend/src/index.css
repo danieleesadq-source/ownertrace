@@ -1,0 +1,149 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-ink: var(--ink);
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-verified: var(--verified);
+  --color-flagged: var(--flagged);
+  --color-amber: var(--amber);
+  --color-accent-gold: var(--accent-gold);
+
+  --color-background: var(--ink);
+  --color-foreground: var(--text-primary);
+
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'Fraunces', serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+
+  --radius-sm: 2px;
+  --radius-md: 3px;
+  --radius-lg: 4px;
+  --radius-xl: 6px;
+}
+
+:root {
+  --ink: #0B0D10;
+  --surface: #14171C;
+  --surface-raised: #1B1F26;
+  --border: #262B33;
+  --border-strong: #3A414C;
+  --text-primary: #E7E9EC;
+  --text-secondary: #B7BCC5;
+  --text-muted: #8A909B;
+  --verified: #3FA796;
+  --flagged: #C1502E;
+  --amber: #C98A2C;
+  --accent-gold: #C9A227;
+}
+
+.dark {
+  --ink: #0B0D10;
+  --surface: #14171C;
+  --surface-raised: #1B1F26;
+  --border: #262B33;
+  --border-strong: #3A414C;
+  --text-primary: #E7E9EC;
+  --text-secondary: #B7BCC5;
+  --text-muted: #8A909B;
+  --verified: #3FA796;
+  --flagged: #C1502E;
+  --amber: #C98A2C;
+  --accent-gold: #C9A227;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+    border-color: var(--border);
+  }
+
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply font-sans antialiased bg-ink text-text-primary;
+    background-color: var(--ink);
+    color: var(--text-primary);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display;
+  }
+
+  ::selection {
+    background-color: var(--accent-gold);
+    color: var(--ink);
+  }
+
+  /* Thin, on-brand scrollbars for the case-file panels */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--border-strong);
+    border-radius: 8px;
+    border: 2px solid var(--surface);
+  }
+}
+
+@keyframes pulse-flagged {
+  0%, 100% {
+    opacity: 1;
+    box-shadow: 0 0 4px var(--flagged);
+  }
+  50% {
+    opacity: 0.5;
+    box-shadow: 0 0 10px var(--flagged);
+  }
+}
+
+.animate-pulse-flagged {
+  animation: pulse-flagged 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
